@@ -13,26 +13,6 @@ app = FastAPI()
 def read_root():
     return {"message": "Hello, I am sahasra, Welcome!"}
 
-# course_Tracking model 
-
-
-
-
-def coursework(echo: Optional[str], path_echo: Optional[str]=None) -> Coursework:
-    return Coursework(
-        course_name="Cloud Computing",
-        course_code="COMSW4153",
-        course_instructor="Donald Ferguson",
-        course_timing="Monday 1:10pm to 3:40pm",
-        requiremnt_satisfied="Systems requirement",
-        goal_grade="A"
-    )
-@app.get("/courses_tracking", response_model=Coursework)
-def track_your_courses(echo: str | None = Query(None, description="Optional echo string")):
-    return coursework(echo=echo, path_echo=None)
-
-
-
 
 # budget tracking model
 
@@ -78,8 +58,60 @@ def get_budget(budget_id: UUID):
 
 
 @app.patch("/budget_tracking/{budget_id}")
-def update_budget(budget_id: UUID):
+def update_budget(budget_id : UUID):
     return {"detail": "Not implemented"}, 501
+
+
+@app.delete("/budget_tracking/{budget_id}")
+def delete_budget(budget_id: UUID):
+    raise HTTPException(status_code=501, detail=   "Not implemented yet")
+
+@app.put("/budget_tracking/{budget_id}", response_model=Budget_read)
+def update_budget(budget_id: UUID, budget: Budget_read):
+    raise HTTPException( status_code=501, detail= "Not implemented yet")
+
+
+
+
+
+
+
+#  course_Tracking model 
+
+
+
+
+def coursework(echo: Optional[str], path_echo: Optional[str]=None) -> Coursework:
+    return Coursework(
+        course_name="Cloud Computing",
+        course_code="COMSW4153",
+        course_instructor="Donald Ferguson",
+        course_timing="Monday 1:10pm to 3:40pm",
+        requiremnt_satisfied="Systems requirement",
+        goal_grade="A"
+    )
+@app.get("/courses_tracking", response_model=Coursework)
+def track_your_courses(echo: str | None = Query(None, description="Optional echo string")):
+    return coursework(echo=echo, path_echo=None)
+
+
+@app.post("/courses_tracking", response_model=Coursework)
+def create_course(course:    Coursework):
+    raise HTTPException(status_code=501, detail ="Not implemented yet")
+
+@app.get("/courses_tracking/{course_id}", response_model= Coursework)
+def get_course(course_id: UUID):
+    raise HTTPException(status_code= 501, detail=" Not implemented yet")
+
+@app.put("/courses_tracking/{course_id}", response_model= Coursework)
+def update_course(course_id: UUID, course: Coursework):
+    raise HTTPException(status_code= 501, detail="Not implemented yet")
+
+@app.delete("/courses_tracking/{course_id}")
+def delete_course(course_id: UUID):
+    raise HTTPException(status_code= 501, detail="Not implemented yet")
+
+
 
 
 
